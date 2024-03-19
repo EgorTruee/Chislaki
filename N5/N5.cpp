@@ -9,7 +9,7 @@ double F(double x)
 {
 	return x * x * x;
 }
-double RightSquer1(double a, double b, double h)
+double RightSquer1(double a, double b, int N)
 {
 	if (a > b)
 	{
@@ -17,8 +17,9 @@ double RightSquer1(double a, double b, double h)
 	}
 	double I = 0;
 	double x = a;
+	double h = (b - a) / N;
 	
-	while (x < b - h)
+	for (int i = 0; i < N; i++)
 	{
 		I += F(x + h) * h;
 		x += h;

@@ -7,7 +7,7 @@ double F(double x)
 {
 	return x * x * x;
 }
-double Trapezoid1(double a, double b, double h)
+double Trapezoid1(double a, double b, int N)
 {
 	if (a > b)
 	{
@@ -16,8 +16,9 @@ double Trapezoid1(double a, double b, double h)
 	double I = 0;
 	double x = a;
 	double f = F(x);
+	double h = (b - a) / N;
 
-	while (x < b - h)
+	for (int i = 0; i < N; i++)
 	{
 		x += h;
 		double t =F(x);

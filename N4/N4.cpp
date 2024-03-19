@@ -10,7 +10,7 @@ double F(double x)
 	return x;	
 }
 //Левый прямоугольники с равномерной сеткой
-double LeftSquer1(double a, double b, double h)
+double LeftSquer1(double a, double b, int N)
 {
 	if (a > b)
 	{
@@ -18,8 +18,9 @@ double LeftSquer1(double a, double b, double h)
 	}
 	double I = 0;
 	double x = a;
+	double h = (b - a) / N;
 	
-	while (x < b - h)
+	for(int i = 0; i < N; i++)
 	{
 		I += F(x) * h;
 		x += h;

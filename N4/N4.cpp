@@ -40,7 +40,7 @@ double LeftSquer2(vector<double> x)
 }
 int main()
 {
-	cout << LeftSquer1(0, 1, 0.1) << endl;
+	cout << LeftSquer1(0, 1, 10) << endl;
 	cout << LeftSquer2({0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0}) << endl;
 
 	return 0;

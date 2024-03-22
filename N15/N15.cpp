@@ -91,7 +91,6 @@ vector<double> Approximation(vector<double> x, vector<double> u, vector<double> 
 	{
 		SqrDelta += i * i;
 	}
-	cout << SqrDelta << endl;
 
 	do
 	{
@@ -116,18 +115,18 @@ vector<double> Approximation(vector<double> x, vector<double> u, vector<double> 
 }
 int main()
 {
-	vector<double> res = Approximation({ 1, 4, 9, 16, 25}, { 1, 2, 3, 4, 5}, {1, 1, 1, 1, 1});
+	vector<double> res = Approximation({ 1, 2, 3, 4, 5 }, { -1, 7, 17, 29, 43}, { 1, 1, 1, 1, 1 });
 	double s = 0;
 
-	for (auto i : res)
+	for (int i = 0; i < res.size(); i++)
 	{
-		cout << i << endl;
+		cout << res[i] << " * x^" << i << endl;
 	}
 	cout << endl;
 
 	for (int i = 0; i < res.size(); i++)
 	{
-		s += res[i] * Phi(i)(2);
+		s += res[i] * Phi(i)(6);
 	}
 	cout << s;
 }

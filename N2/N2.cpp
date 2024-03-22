@@ -15,7 +15,7 @@ double SimpleIteration(double x0, double epsilon)
 	double x2 = F(x1);
 	double x3 = F(x2);
 
-	while ((x3 - x2) / (1 - (x3 - x2) / (x2 - x1)) > epsilon)
+	while (abs((x3 - x2) / (1 - (x3 - x2) / (x2 - x1))) > epsilon)
 	{
 		x1 = x2;
 		x2 = x3;

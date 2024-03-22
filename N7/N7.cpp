@@ -21,7 +21,7 @@ double Trapezoid1(double a, double b, int N)
 	for (int i = 0; i < N; i++)
 	{
 		x += h;
-		double t =F(x);
+		double t = F(x);
 
 		I += (f + t) * h / 2;
 		f = t;

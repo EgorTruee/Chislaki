@@ -40,6 +40,6 @@ int main()
 
 	for (auto& i : solution)
 	{
-		cout << i << endl;
+		cout << i << endl; //Maybe this go to gause
 	}
 }

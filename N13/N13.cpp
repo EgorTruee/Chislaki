@@ -3,9 +3,19 @@
 
 using namespace std;
 
+unsigned long long Fact(int n)
+{
+	unsigned long long res = 1;
+
+	for (int i = 0; i < n; i++)
+	{
+		res *= i;
+	}
+	return res;
+}
 double NewtonInterpolation1(double x0, double* u, double* x, int N)
 {
-	vector<vector<double>> U(u, u + N);
+	vector<vector<double>> U({ vector<double>(u, u + N) });
 
 	for (int i = 1; i < N; i++)
 	{

@@ -1,111 +1,43 @@
-//Не работает
+//Программа вроде работает по крайней мере все программы по невязкам работают по этому алгоритму
+//
+//Для компиляции необходимо скачать и собрать(собирать обязательно несмотря на то что пишут разрабы в гайде) библиотеку Eigen и записать 
+//путь до неё в переменноой которая определяется в LocalConfig.cmake
 #include <iostream>
-#include <vector>
+#include <Eigen\Dense>
 #include <conio.h>
 
 using namespace std;
+using namespace Eigen;
 
-double operator*(vector<double> lhs, vector<double> rhs)
+VectorXd MinNevyazki(MatrixXd a, VectorXd b, VectorXd x0, double epsilon)
 {
-	double res = 0;
+	int i = 0;
 
-	for (int i = 0; i < lhs.size(); i++)
+	while ((a * x0 - b).norm() / b.norm() > epsilon && i < 100000)
 	{
-		res += lhs[i] * rhs[i];
+		VectorXd y = a * x0 - b;
+		VectorXd ay = a * y;
+		double t = (y.dot(ay)) / (ay.dot(ay));
+
+		x0 -= t * y;
+		i++;
 	}
-	return res;
-}
-vector<double> operator*(vector<vector<double>> lhs, vector<double> rhs)
-{
-	vector<double> res(rhs.size());
-
-	for (int i = 0; i < rhs.size(); i++)
-	{
-		for (int j = 0; j < rhs.size(); j++)
-		{
-			res[i] = lhs[i][j] * rhs[j];
-		}
-	}
-	return res;
-}
-vector<double> operator+(vector<double> lhs, vector<double> rhs)
-{
-	vector<double> res(lhs.size());
-
-	for (int i = 0; i < lhs.size(); i++)
-	{
-		res[i] = lhs[i] + rhs[i];
-	}
-	return res;
-}
-vector<double> operator*(vector<double> lhs, double rhs)
-{
-	vector<double> res(lhs.size());
-
-	for (int i = 0; i < res.size(); i++)
-	{
-		res[i] = lhs[i] * rhs;
-	}
-	return res;
-}
-vector<double> operator*(double lhs, vector<double> rhs)
-{
-	return rhs * lhs;
-}
-vector<double> operator-(vector<double> lhs, vector<double> rhs)
-{
-	return lhs + (-1) * rhs;
-}
-double ABS(vector<double> vector)
-{
-	double t = 0;
-
-	for (int i = 0; i < vector.size(); i++)
-	{
-		t += vector[i] * vector[i];
-	}
-	return sqrt(t);
-}
-vector<double> MinimalNevyazki(vector<vector<double>> a, vector<double> b, vector<double> x0, double epsilon)
-{
-	int N = x0.size();
-	double accuracy;
-
-	do
-	{
-		vector<double> y = a * x0 + b;
-		vector<double> ay = a * y;
-		double t = (y * ay) / (ay * ay);
-		
-		cout << t << endl;
-
-		x0 = x0 - t * y;
-		accuracy = ABS(y) / ABS(b);
-
-		for (auto& i : x0)
-		{
-			cout << i << " ";
-		}
-		cout << endl;
-		_getch();
-
-	} while (accuracy > epsilon);
-
 	return x0;
 }
 int main()
 {
-	vector<double> res = MinimalNevyazki(
-		{ {1, 2, 3},
-		{4, 5, 7},
-		{7, 8, 9} },
-		{ 1, 3, 4 },
-		{ 0, 0, 0 },
-		0.00001
-	);
+	MatrixXd m(2, 2);
+	VectorXd v(2);
+	VectorXd x0(2);
 
-	for (auto& i : res)
-	{
-		cout << i << endl;
-	}
+	m(0, 0) = 1;
+	m(1, 0) = 2;
+	m(0, 1) = 3;
+	m(1, 1) = 4;
+	v(0) = 1;
+	v(1) = 2;
+	x0(0) = 1;
+	x0(1) = 1;
+
+	cout << MinNevyazki(m, v, x0, 0.00001);
 }

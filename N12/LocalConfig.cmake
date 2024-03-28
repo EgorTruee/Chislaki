@@ -1,1 +1,0 @@
-set(Eigen3_DIR D:\libruries\EIGEN\eigen-3.4.0\build)

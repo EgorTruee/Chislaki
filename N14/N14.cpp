@@ -33,10 +33,7 @@ double NewtonInterpolation(double x0, vector<double> u, vector<double> x)
 	}
 	return res;
 }
-double F(double x)
-{
-	return x * x - 4;
-}
+
 double NewtonInterpolationMethod(vector<double> u, vector<double> x)
 {
 	return NewtonInterpolation(0, x, u);

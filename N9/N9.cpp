@@ -38,7 +38,7 @@ double AccuracyOrder(double a, double b, int N)
 	double RrN = (IrN - IN) / (pow(r, p) - 1);
 	double RrrN = (IrrN - IrN) / (pow(r, p) - 1);
 
-	return log(RrN / RrrN) / log(r);
+	return log(abs(RrN / RrrN)) / log(r);
 }
 int main()
 {

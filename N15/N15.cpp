@@ -7,12 +7,10 @@ using namespace std;
 double Integral(vector<double> x, vector<double> u)
 {
 	double I = 0;
-	double F = u[0];
 
 	for (int i = 1; i < u.size(); i++)
 	{
-		I += (F + u[i]) / 2 * (x[i] - x[i - 1]);
-		F = u[i];
+		I += (u[i - 1] + u[i]) / 2 * (x[i] - x[i - 1]);
 	}
 	return I;
 }
@@ -87,9 +85,9 @@ vector<double> Approximation(vector<double> x, vector<double> u, vector<double> 
 	double SqrError = 0;
 	vector<double> res;
 
-	for (auto& i : delta)
+	for (int i = 0; i < delta.size(); i++)
 	{
-		SqrDelta += i * i;
+		SqrDelta += delta[i] * delta[i];
 	}
 
 	do
@@ -115,7 +113,7 @@ vector<double> Approximation(vector<double> x, vector<double> u, vector<double> 
 }
 int main()
 {
-	vector<double> res = Approximation({ 1, 2, 3, 4, 5 }, { -1, 7, 17, 29, 43}, { 1, 1, 1, 1, 1 });
+	vector<double> res = Approximation({ 1, 2, 3, 4, 5 }, { -4, -1, 4, 11, 20 }, { 1, 1, 1, 1, 1 });
 	double s = 0;
 
 	for (int i = 0; i < res.size(); i++)

@@ -14,9 +14,9 @@ double Integral(vector<double> x, vector<double> u)
 	}
 	return I;
 }
-function<double(double)> Phi(unsigned int k)
+double Phi(unsigned int k, double x)
 {
-	return [k](double x) {return pow(x, k); };
+	return pow(x, k);
 }
 vector<double> Gaus(vector<vector<double>> a, vector<double> b)
 {
@@ -63,7 +63,7 @@ vector<double> PolynomApproximation(int k, vector<double> x, vector<double> u)
 
 			for (int b = 0; b < x.size(); b++)
 			{
-				t[b] = Phi(i)(x[b]) * Phi(j)(x[b]);
+				t[b] = Phi(i, x[b]) * Phi(j, x[b]);
 			}
 			
 			A[i][j] = Integral(x, t);
@@ -72,7 +72,7 @@ vector<double> PolynomApproximation(int k, vector<double> x, vector<double> u)
 
 		for(int j = 0; j < x.size(); j++)
 		{
-			UPhi[j] = u[j] * Phi(i)(x[j]);
+			UPhi[j] = u[j] * Phi(i, x[j]);
 		}
 		B[i] = Integral(x, UPhi);
 	}
@@ -101,7 +101,7 @@ vector<double> Approximation(vector<double> x, vector<double> u, vector<double> 
 
 			for (int j = 0; j < res.size(); j++)
 			{
-				F += res[j] * Phi(j)(x[i]);
+				F += res[j] * Phi(j, x[i]);
 			}
 			SqrError += (u[i] - F) * (u[i] - F);
 		}
@@ -124,7 +124,7 @@ int main()
 
 	for (int i = 0; i < res.size(); i++)
 	{
-		s += res[i] * Phi(i)(6);
+		s += res[i] * Phi(i, 6);
 	}
 	cout << s;
 }
